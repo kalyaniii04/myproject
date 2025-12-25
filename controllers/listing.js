@@ -1,14 +1,14 @@
 const Listing = require("../models/listing.js");
-const NodeGeocoder = require("node-geocoder");
+// const NodeGeocoder = require("node-geocoder");
 
 /* =========================
    GEOCODER CONFIGURATION
    ========================= */
-const geocoder = NodeGeocoder({
-  provider: "openstreetmap",
-  userAgent: "WanderLustApp/1.0 (kalya@example.com)",
-  timeout: 5000,
-});
+// const geocoder = NodeGeocoder({
+//   provider: "openstreetmap",
+//   userAgent: "WanderLustApp/1.0 (kalya@example.com)",
+//   timeout: 5000,
+// });
 
 /* =========================
    INDEX – SHOW ALL LISTINGS
@@ -146,7 +146,17 @@ module.exports.updateListing = async (req, res) => {
     }
 
     if (req.body.Listing.location) {
-      const geoData = await geocoder.geocode(req.body.Listing.location);
+      const geoData = await geocoder.geocode(req.body.listing.location);
+      
+      if (!geoData || geoData.length === 0) {
+        throw new Error("Invalid location");
+      }
+
+listing.geometry = {
+  type: "Point",
+  coordinates: [geoData[0].longitude, geoData[0].latitude],
+};
+
       if (geoData.length) {
         listing.geometry = {
           type: "Point",

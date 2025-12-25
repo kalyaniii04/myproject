@@ -1,16 +1,13 @@
 const NodeGeocoder = require("node-geocoder");
 
-const options = {
+const geocoder = NodeGeocoder({
   provider: "openstreetmap",
-  httpAdapter: "fetch",
-  formatter: null,
-  fetch: {
-    headers: {
-      "User-Agent": "WanderLust_App (kalyanibj1@gmail.com)"
-    }
-  }
-};
 
-const geocoder = NodeGeocoder(options);
+  // REQUIRED to avoid OSM blocking
+  userAgent: "myproject/1.0 (contact: your-email@gmail.com)",
+
+  // Optional but helpful
+  timeout: 5000,
+});
 
 module.exports = geocoder;
