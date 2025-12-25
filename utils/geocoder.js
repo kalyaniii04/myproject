@@ -6,7 +6,7 @@ const options = {
   formatter: null,
   fetch: {
     headers: {
-      "User-Agent": "WanderLust-App/1.0 (contact: your-real-email@example.com)"
+      "User-Agent": "WanderLust_App (kalyanibj1@gmail.com)"
     }
   }
 };
