@@ -1,14 +1,14 @@
 const Listing = require("../models/listing.js");
-// const NodeGeocoder = require("node-geocoder");
+const NodeGeocoder = require("node-geocoder");
 
 /* =========================
    GEOCODER CONFIGURATION
    ========================= */
-// const geocoder = NodeGeocoder({
-//   provider: "openstreetmap",
-//   userAgent: "WanderLustApp/1.0 (kalya@example.com)",
-//   timeout: 5000,
-// });
+const geocoder = NodeGeocoder({
+  provider: "openstreetmap",
+  userAgent: "WanderLustApp/1.0 (kalya@example.com)",
+  timeout: 5000,
+});
 
 /* =========================
    INDEX – SHOW ALL LISTINGS
