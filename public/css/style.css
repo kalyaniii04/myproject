@@ -1,0 +1,156 @@
+body{
+    font-family: "Poppins", sans-serif ; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+:root {
+    --nav-bg: white;
+}
+
+.contanier {
+    flex: 1;  
+}
+    
+.navbar{
+    height: 5rem;  
+    background-color: var(--nav-bg);
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    color: #fe424d !important;
+}
+
+.nav-link{
+    font-size: 20px;
+    color: black;
+}
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: black;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-social, .f-info-brand{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-social i{
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.f-info{
+    height: 8rem;
+    background-color: gray;
+    text-align: center ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* card */
+.listing-card{
+    border: none;
+    margin: 1.3rem;
+}
+
+.row {
+    justify-content: center;
+}
+
+.card-img-top{
+    border-radius: 1.5rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+.card-img-overlay:hover{
+    background-color: beige;
+    opacity: 0.2;
+}
+
+/* Show Route */
+.show-img{
+    height: 30vh;
+}
+
+.btns {
+    display: flex;   
+}
+
+.btns form{
+    margin-left: 2rem;
+}
+
+.btns a{
+    background-color: #fe424d;
+}
+
+
+/* Dark theme overrides */
+.dark {
+    --bg-color: #3F4F44;
+    --list-color: #5A6353;
+    --text-color: #DCD7C9;
+    --link-color: #A27B5C;
+    --nav-bg: #2C3930;
+    --hover-color: #b68b2b;
+}
+
+/* Apply variables */
+body, input, .card-body, .listing-card {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+form input {
+    color: var(--list-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.navbar {
+    background-color: var(--nav-bg);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-logo-text {
+    color: var(--hover-color) !important;
+    text-decoration: none;
+}
+
+.card-img-overlay:hover {
+    background-color: var(--hover-color);
+    opacity: 0.2;
+}
+
+.form-control,
+.form-select {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
