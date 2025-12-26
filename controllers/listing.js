@@ -8,19 +8,19 @@ const NodeGeocoder = require("node-geocoder");
 // You must use the 'fetch' option to set the header manually to comply with OSM policy.
 const geocoder = NodeGeocoder({
   provider: "openstreetmap",
-  // email is a standard option for openstreetmap provider in node-geocoder
-  email: "kalya@example.com", 
+  email: "kalyanibj1@gmail.com", // Your email here
   timeout: 5000,
   fetch: (url, options) => {
     return fetch(url, {
       ...options,
       headers: {
         ...options.headers,
-        "User-Agent": "WanderLustApp/1.0 (kalya@example.com)",
+        "User-Agent": "WanderLustApp/1.0 (kalyanibj1@gmail.com)", // This is the ID badge
       },
     });
   },
 });
+
 
 /* =========================
    INDEX – SHOW ALL LISTINGS
