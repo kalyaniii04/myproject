@@ -4,8 +4,6 @@ const NodeGeocoder = require("node-geocoder");
 /* =========================
    GEOCODER CONFIGURATION
    ========================= */
-// FIX: node-geocoder doesn't support 'userAgent' directly in the options object.
-// You must use the 'fetch' option to set the header manually to comply with OSM policy.
 const geocoder = NodeGeocoder({
   provider: "openstreetmap",
   email: "kalyanibj1@gmail.com", // Your email here
