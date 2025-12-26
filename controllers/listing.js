@@ -4,10 +4,22 @@ const NodeGeocoder = require("node-geocoder");
 /* =========================
    GEOCODER CONFIGURATION
    ========================= */
+// FIX: node-geocoder doesn't support 'userAgent' directly in the options object.
+// You must use the 'fetch' option to set the header manually to comply with OSM policy.
 const geocoder = NodeGeocoder({
   provider: "openstreetmap",
-  userAgent: "WanderLustApp/1.0 (kalya@example.com)",
+  // email is a standard option for openstreetmap provider in node-geocoder
+  email: "kalya@example.com", 
   timeout: 5000,
+  fetch: (url, options) => {
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        "User-Agent": "WanderLustApp/1.0 (kalya@example.com)",
+      },
+    });
+  },
 });
 
 /* =========================
@@ -127,6 +139,7 @@ module.exports.updateListing = async (req, res) => {
   try {
     const { id } = req.params;
 
+    // Update basic fields
     const listing = await Listing.findByIdAndUpdate(
       id,
       { ...req.body.Listing },
@@ -138,6 +151,7 @@ module.exports.updateListing = async (req, res) => {
       return res.redirect("/listings");
     }
 
+    // Update image if provided
     if (req.file) {
       listing.image = {
         url: req.file.path,
@@ -145,19 +159,12 @@ module.exports.updateListing = async (req, res) => {
       };
     }
 
+    // Update geometry if location changed
     if (req.body.Listing.location) {
-      const geoData = await geocoder.geocode(req.body.listing.location);
+      // FIX: Changed 'req.body.listing.location' to 'req.body.Listing.location' (capital L)
+      const geoData = await geocoder.geocode(req.body.Listing.location);
       
-      if (!geoData || geoData.length === 0) {
-        throw new Error("Invalid location");
-      }
-
-listing.geometry = {
-  type: "Point",
-  coordinates: [geoData[0].longitude, geoData[0].latitude],
-};
-
-      if (geoData.length) {
+      if (geoData && geoData.length > 0) {
         listing.geometry = {
           type: "Point",
           coordinates: [geoData[0].longitude, geoData[0].latitude],
