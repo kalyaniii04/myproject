@@ -63,19 +63,20 @@ module.exports.addNewListing = async (req, res) => {
         filename: req.file.filename,
       };
     }
-
-    if (req.body.Listing.location) {
+    
+    const isGeocodingAllowed = process.env.DISABLE_GEOCODING !== "true";
+    
+    if (isGeocodingAllowed && req.body.Listing.location) {
       const geoData = await geocoder.geocode(req.body.Listing.location);
-      newListing.geometry = geoData.length
-        ? {
-            type: "Point",
-            coordinates: [geoData[0].longitude, geoData[0].latitude],
-          }
-        : {
-            type: "Point",
-            coordinates: [0, 0],
-          };
+      
+      if (geoData.length) {
+        newListing.geometry = {
+          type: "Point",
+          coordinates: [geoData[0].longitude, geoData[0].latitude],
+        };
+      }
     }
+
 
     await newListing.save();
     req.flash("success", "New Listing Created Successfully!");
